@@ -110,9 +110,9 @@ class _HomePageState extends State<HomePage> {
                 width: MediaQuery.of(context).size.width * 0.25,
                 height: 80.0,
                 decoration: BoxDecoration(
-                  color: Grey,
+                  color: DarkGrey,
                   borderRadius: BorderRadius.all(
-                    Radius.circular(15),
+                    Radius.circular(30),
                   ),
                 ),
                 child: Column(
@@ -135,6 +135,37 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: LimeGreen,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(30),
+                  ),
+                ),
+                width: MediaQuery.of(context).size.width * 0.25,
+                height: 80.0,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      (double.tryParse(info['points'])/10).toStringAsFixed(1) + " lbs",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      "of food saved",
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+                margin: EdgeInsets.only(left: 12.0, right: 12.0),
               ),
               CircularPercentIndicator(
                 radius: MediaQuery.of(context).size.width * 0.25,
@@ -164,37 +195,6 @@ class _HomePageState extends State<HomePage> {
                 animation: true, //animation to show progress at first
                 animationDuration: 500,
                 circularStrokeCap: CircularStrokeCap.round,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: LimeGreen,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(15),
-                  ),
-                ),
-                width: MediaQuery.of(context).size.width * 0.25,
-                height: 80.0,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      (double.tryParse(info['points'])/10).toStringAsFixed(1) + " lbs",
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      "of food saved",
-                      style: TextStyle(
-                        fontSize: 14.0,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-                margin: EdgeInsets.only(left: 12.0, right: 12.0),
               ),
             ],
           ),

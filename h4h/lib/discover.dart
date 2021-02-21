@@ -3,10 +3,9 @@ import 'package:h4h/styleguide.dart';
 import './globalWidgets/searchBar.dart';
 import 'businessPage/deals.dart';
 import 'categories.dart';
-import 'categories.dart';
-import 'styleguide.dart';
 import 'styleguide.dart';
 import 'package:h4h/globalWidgets/GlobalVars.dart' as Globals;
+import 'package:h4h/globalWidgets/roundedDivider.dart';
 
 class DiscoverPage extends StatefulWidget {
   @override
@@ -18,7 +17,6 @@ class _DiscoverPageState extends State<DiscoverPage> {
   Widget build(BuildContext context) {
     return Material(
       color: Colors.white,
-      child: SingleChildScrollView(
         child: Column(
           children: [
             _buildHeader(context),
@@ -28,20 +26,19 @@ class _DiscoverPageState extends State<DiscoverPage> {
             Stack(
               children: [
                 Positioned(
-                    left: 20,
-                    child: Icon(Icons.trending_up, color: LimeGreen, size: BodyTextSize * 2)
-                ),
+                    left: 32,
+                    child: Icon(Icons.trending_up,
+                        color: LimeGreen, size: BodyTextSize * 2)),
                 Container(
                   alignment: Alignment.centerLeft,
-                  padding: EdgeInsets.only(left: 55),
+                  padding: EdgeInsets.only(left: 60),
                   child: Text(
                     "Trending Items",
                     style: TextStyle(
                         fontFamily: "AvenirBlack",
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
-                        fontSize: BodyTextSize * 1.5
-                    ),
+                        fontSize: BodyTextSize * 1.5),
                   ),
                 ),
               ],
@@ -51,20 +48,19 @@ class _DiscoverPageState extends State<DiscoverPage> {
             Stack(
               children: [
                 Positioned(
-                    left: 20,
-                    child: Icon(Icons.money, color: LimeGreen, size: BodyTextSize * 2)
-                ),
+                    left: 32,
+                    child: Icon(Icons.money,
+                        color: LimeGreen, size: BodyTextSize * 2)),
                 Container(
                   alignment: Alignment.centerLeft,
-                  padding: EdgeInsets.only(left: 55),
+                  padding: EdgeInsets.only(left: 60),
                   child: Text(
                     "Other Deals",
                     style: TextStyle(
                         fontFamily: "AvenirBlack",
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
-                        fontSize: BodyTextSize * 1.5
-                    ),
+                        fontSize: BodyTextSize * 1.5),
                   ),
                 ),
               ],
@@ -72,47 +68,49 @@ class _DiscoverPageState extends State<DiscoverPage> {
             _buildOtherDeals(context),
           ],
         ),
-      ),
     );
   }
 
   //header
   Widget _buildHeader(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.18, //header approximately 18% of screen height
-      width: MediaQuery.of(context).size.width, //header approximately 18% of screen height
+      height: MediaQuery.of(context).size.height *
+          0.18, //header approximately 18% of screen height
+      width: MediaQuery.of(context)
+          .size
+          .width, //header approximately 18% of screen height
       decoration: BoxDecoration(
         color: LimeGreen,
-        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: InkWell(
-              onTap: () {
-                //Navigator.pop(context);
-              },
-              child:  Container(
-                margin: EdgeInsets.only(left: 30.0, top: 60.0),
-                child: Icon(Icons.arrow_back, color: Colors.white),
-              ),
-            ),
+          Container(
+            //divider
+            width: MediaQuery.of(context).size.width * 0.1,
+            margin: EdgeInsets.only(top: 60, bottom: 10),
+            child: RoundedDivider(context),
           ),
           Text(
-            'Discover nearby deals',
+            'Discover deals',
             style: TextStyle(
               fontSize: BodyTextSize * 2,
-              fontFamily: "AvenirBlack",
+              fontFamily: "AvenirMedium",
+              fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
           ),
+          SizedBox(
+            height: 5.0,
+          ),
           Text(
-            Globals.info['location'],
+            "Right near you",
             style: TextStyle(
-              fontSize: BodyTextSize * 1.5,
+              fontSize: BodyTextSize * 1.3,
               fontFamily: "AvenirMedium",
+              fontWeight: FontWeight.normal,
               color: Colors.white,
             ),
           ),
@@ -123,7 +121,9 @@ class _DiscoverPageState extends State<DiscoverPage> {
 
   Widget _buildSearchBar(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width, //header approximately 18% of screen height
+      width: MediaQuery.of(context)
+          .size
+          .width, //header approximately 18% of screen height
       margin: EdgeInsets.only(top: 10, left: 30, right: 30),
       child: SearchBar(),
     );
@@ -131,28 +131,30 @@ class _DiscoverPageState extends State<DiscoverPage> {
 
   Widget _buildFilterBar(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.07, //header approximately 7% of screen height
-      width: MediaQuery.of(context).size.width * 0.97, //header approximately 18% of screen height
+      height: MediaQuery.of(context).size.height *
+          0.07, //header approximately 7% of screen height
+      width: double.infinity, //header approximately 18% of screen height
       decoration: BoxDecoration(
         color: DarkGrey,
-        borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           //Expiration date
           Container(
-            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+            padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 9.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: Grey,
+              color: BlueGrey,
             ),
-            child: Row(  //Your Stats Label
+            child: Row(
+              //Your Stats Label
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   padding: EdgeInsets.only(right: 5.0),
-                  child: Icon(Icons.calendar_today_rounded, color: Colors.white, size: 14),
+                  child: Icon(Icons.calendar_today_rounded,
+                      color: Colors.white, size: 14),
                 ),
                 Container(
                   child: Text(
@@ -169,12 +171,13 @@ class _DiscoverPageState extends State<DiscoverPage> {
 
           //Price
           Container(
-            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+            padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 9.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: Grey,
+              color: BlueGrey,
             ),
-            child: Row(  //Your Stats Label
+            child: Row(
+              //Your Stats Label
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
@@ -196,12 +199,13 @@ class _DiscoverPageState extends State<DiscoverPage> {
 
           //Category
           Container(
-            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+            padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 9.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: Grey,
+              color: BlueGrey,
             ),
-            child: Row(  //Your Stats Label
+            child: Row(
+              //Your Stats Label
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
@@ -223,17 +227,19 @@ class _DiscoverPageState extends State<DiscoverPage> {
 
           //Category
           Container(
-            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+            padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 9.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: Grey,
+              color: BlueGrey,
             ),
-            child: Row(  //Your Stats Label
+            child: Row(
+              //Your Stats Label
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   padding: EdgeInsets.only(right: 5.0),
-                  child: Icon(Icons.location_city, color: Colors.white, size: 14),
+                  child:
+                      Icon(Icons.location_city, color: Colors.white, size: 14),
                 ),
                 Container(
                   child: Text(
@@ -254,7 +260,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
 
   Widget _buildTrendingItems(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 20, top: 10),
+      margin: EdgeInsets.only(left: 32, right: 32, top: 10),
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: FoodCategories(context),
