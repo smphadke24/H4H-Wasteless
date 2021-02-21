@@ -6,7 +6,6 @@ import 'package:h4h/businessPage/BusinessPage.dart';
 import './single_food.dart';
 import './single_store.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:flutter/foundation.dart';
 import 'package:h4h/categories.dart';
 import 'package:h4h/globalWidgets/GlobalVars.dart' as Globals;
 
@@ -20,33 +19,18 @@ class _HomePageState extends State<HomePage> {
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Future<Map<String, String>> _getHomeInfo() async {
-    var map = Map<String, String>();
-    var temp = await firestore.collection('users').doc(Globals.email).get();
-    temp.data().forEach((key, value) {
-      map[key] = value.toString();
-    });
-    return map;
-  }
-
   @override
   Widget build(BuildContext cont) {
-    return FutureBuilder(
-        future: _getHomeInfo(),
-        builder: (context, AsyncSnapshot<Map<String, String>> snapshot) {
-          if (snapshot.hasData) {
-            return _buildPage(cont, snapshot.data);
-          } else {
-            return Container(
-              margin: EdgeInsets.all(40),
-              child: CircularProgressIndicator(),
-            );
-          }
-        }
-    );
+    return _buildPage(cont);
   }
 
-  Widget _buildPage(BuildContext context, Map<String, String> info) {
+  Widget _buildPage(BuildContext context) {
+    var info = Globals.info;
+    List<Widget> stores = [];
+    Globals.stores.forEach((element) {
+      stores.add(SingleStore.fromDB(element));
+    });
+    //print('Will build home.' + Globals.stores.toString());
     return Container(
       padding: EdgeInsets.all(32.0),
       child: Column(
@@ -253,8 +237,10 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SingleFood("Fruits",
                     "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.searchpng.com%2Fwp-content%2Fuploads%2F2018%2F12%2FFruits-PNG-HD-Transparent-Fruits.png&f=1&nofb=1"),
-                SingleFood("Idk",
-                    "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcascade.madmimi.com%2Fpromotion_images%2F3055%2F8563%2Foriginal%2FIDK_Logo.png%3F1512750151&f=1&nofb=1"),
+                SingleFood("Vegetables",
+                    "https://www.kindpng.com/picc/m/599-5999759_fresh-vegetables-png-transparent-png.png"),
+                SingleFood("Baked Goods",
+                    "https://img.pngio.com/bakery-bread-baking-biscuits-png-clipart-baked-goods-baker-bakery-goods-png-728_696.jpg"),
               ],
             ),
           ),
@@ -280,20 +266,7 @@ class _HomePageState extends State<HomePage> {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: <Widget>[
-                SingleStore(
-                    "QFC",
-                    "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frmkcdn.successfactors.com%2F2fb422b4%2Fc21f58b6-2354-4e38-8f41-8.jpg&f=1&nofb=1",
-                    "123 Elmo Way"),
-                SingleStore(
-                    "Safeway",
-                    "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fa57.foxnews.com%2Fa57.foxnews.com%2Fstatic.foxnews.com%2Ffoxnews.com%2Fcontent%2Fuploads%2F2018%2F09%2F640%2F320%2F1862%2F1048%2Fistock-485238536.jpg%3Fve%3D1%26tl%3D1%3Fve%3D1%26tl%3D1&f=1&nofb=1",
-                    "123 Elmo Way"),
-                SingleStore(
-                    "QFC",
-                    "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frmkcdn.successfactors.com%2F2fb422b4%2Fc21f58b6-2354-4e38-8f41-8.jpg&f=1&nofb=1",
-                    "123 Elmo Way"),
-              ],
+              children: stores,
             ),
           ),
         ],

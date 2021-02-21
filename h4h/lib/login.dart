@@ -11,6 +11,7 @@ class Login extends StatelessWidget {
   TextEditingController _passwordController = TextEditingController();
 
   _login(BuildContext cont) async {
+    print('working...');
     try {
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _emailController.text,
@@ -125,6 +126,7 @@ class Login extends StatelessWidget {
                 ),
                 color: LimeGreen,
                 onPressed: () {
+                  print('Working');
                   _login(cont);
                 },
                 child: Text(

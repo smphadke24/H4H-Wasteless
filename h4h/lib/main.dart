@@ -5,9 +5,9 @@ import 'package:h4h/styleguide.dart';
 import 'package:h4h/globalWidgets/GlobalVars.dart' as Globals;
 
 import './home.dart';
-import './login.dart';
 import './businessPage/businessPage.dart';
 import './cart.dart';
+import 'login.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,80 +24,40 @@ class MyApp extends StatelessWidget {
   static const String _title = 'Flutter Code Sample';
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  _UPLOADDATA() async {
-    List<Map<String, dynamic>> myData1 = [
-      {'name': 'A2 Organic Milk', 'newprice': '3.99', 'oldprice': '4.99', 'expiry': '2/24/2021',
-        'sdescription': 'MILK!', 'ldescription': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.',
-        'store': 'Whole Foods', 'location': 'Cupertino, CA', 'ozFoodSaved': '16'},
-
-      {'name': 'Organic White Bread', 'newprice': '3.99', 'oldprice': '4.99', 'expiry': '2/25/2021',
-        'sdescription': 'Fluffy White Bread!', 'ldescription': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.',
-        'store': 'Whole Foods', 'location': 'Cupertino, CA', 'ozFoodSaved': '36'},
-
-      {'name': 'Organic Swiss Cheese', 'newprice': '3.99', 'oldprice': '4.99', 'expiry': '2/24/2021',
-        'sdescription': 'Sliced cheese', 'ldescription': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.',
-        'store': 'Whole Foods', 'location': 'Cupertino, CA', 'ozFoodSaved': '16'},
-
-      {'name': 'Chobani Greek Yogurt', 'newprice': '5.99', 'oldprice': '6.99', 'expiry': '2/23/2021',
-        'sdescription': 'Quality, organic yogurt', 'ldescription': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.',
-        'store': 'Whole Foods', 'location': 'Cupertino, CA', 'ozFoodSaved': '36'},
-
-      {'name': 'French Bread', 'newprice': '4.99', 'oldprice': '5.99', 'expiry': '2/27/2021',
-        'sdescription': 'Oui oui baguette', 'ldescription': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.',
-        'store': 'Whole Foods', 'location': 'Cupertino, CA', 'ozFoodSaved': '48'},
-
-      {'name': 'Chocolate Croissants', 'newprice': '3.99', 'oldprice': '5.99', 'expiry': '2/22/2021',
-        'sdescription': 'Dark chocolate croissants', 'ldescription': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.',
-        'store': 'Whole Foods', 'location': 'Cupertino, CA', 'ozFoodSaved': '32'},
-
-      {'name': 'Organic Oranges', 'newprice': '2.99', 'oldprice': '3.99', 'expiry': '2/25/2021',
-        'sdescription': 'Fresh Navel Oranges', 'ldescription': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.',
-        'store': 'Whole Foods', 'location': 'Cupertino, CA', 'ozFoodSaved': '36'},
-
-      {'name': 'Organic Pineapples', 'newprice': '4.49', 'oldprice': '5.99', 'expiry': '2/23/2021',
-        'sdescription': 'Dole Pineapples', 'ldescription': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.',
-        'store': 'Whole Foods', 'location': 'Cupertino, CA', 'ozFoodSaved': '36'},
-
-      {'name': 'Blueberries', 'newprice': '4.99', 'oldprice': '5.99', 'expiry': '2/27/2021',
-        'sdescription': 'Locally grown blueberries', 'ldescription': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.',
-        'store': 'Whole Foods', 'location': 'Cupertino, CA', 'ozFoodSaved': '26'},
-
-      {'name': 'Organic Corn', 'newprice': '2.99', 'oldprice': '3.99', 'expiry': '2/23/2021',
-        'sdescription': "Who doesn't like corn?", 'ldescription': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.',
-        'store': 'Whole Foods', 'location': 'Cupertino, CA', 'ozFoodSaved': '16'},
-
-      {'name': 'Organic Spinach', 'newprice': '3.99', 'oldprice': '4.99', 'expiry': '2/26/2021',
-        'sdescription': 'Locally grown', 'ldescription': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.',
-        'store': 'Whole Foods', 'location': 'Cupertino, CA', 'ozFoodSaved': '16'},
-    ];
-
-    myData1.forEach((element) {
-      var temp = FirebaseFirestore.instance.collection('stores').doc('').collection('listings').doc();
-      //var temp = FirebaseFirestore.instance.collection('foodCategories').doc('Dairy').collection('listings').doc();
-      element.forEach((key, value) {
-        temp.set(
-            {key: value}, SetOptions(merge: true));
-      });
-    });
-  }
-
-  Future<Map<String, String>> _getHomeInfo() async {
+  Future<int> _getHomeInfo() async {
     var map = Map<String, String>();
     var temp = await firestore.collection('users').doc(Globals.email).get();
+    print('a');
+    var temp2 = await firestore.collection('stores').get();
+    print('b');
     temp.data().forEach((key, value) {
       map[key] = value.toString();
     });
-    return map;
+    print('a');
+    temp2.docs.forEach((element) {
+      var storeMap = Map<String, String>();
+      if (element.exists) {
+        print('b');
+        element.data().forEach((key, value) {
+          storeMap[key] = value.toString();
+        });
+      }
+      Globals.stores.add(storeMap);
+    });
+    print('Got info.');
+    Globals.info = map;
+    Globals.future = true;
+    return 1;
   }
 
   @override
   Widget build(BuildContext context) {
     //_UPLOADDATA();
-    return FutureBuilder(
-        future: _getHomeInfo(),
-        builder: (context, AsyncSnapshot<Map<String, String>> snapshot) {
-          if (snapshot.hasData) {
-            return _build(snapshot.data);
+    return StreamBuilder(
+        stream: _getHomeInfo().asStream(),
+        builder: (context, AsyncSnapshot<int> snapshot) {
+          if (snapshot.hasData || Globals.future) {
+            return _build();
           } else {
             return Container(
               margin: EdgeInsets.all(40),
@@ -108,8 +68,7 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  Widget _build(Map<String, String> map) {
-    Globals.info = map;
+  Widget _build() {
     return MaterialApp(
       title: _title,
       theme: ThemeData(fontFamily: "Lato"),

@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:h4h/styleguide.dart';
 
 class SingleStore extends StatelessWidget {
-  final String storeName;
-  final String url;
-  final String address;
+  String storeName;
+  String url;
+  String address;
 
   SingleStore(this.storeName, this.url, this.address);
+
+  SingleStore.fromDB(map) {
+    this.storeName = map['name'];
+    this.url = map['url'];
+    this.address = map['location'];
+  }
 
   @override
   Widget build(BuildContext context) {
