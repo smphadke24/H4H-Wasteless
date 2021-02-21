@@ -4,7 +4,7 @@ import 'package:h4h/styleguide.dart';
 import './home.dart';
 import './login.dart';
 import './cart.dart';
-import './businessPage/businessPage.dart';
+import './discover.dart';
 
 void main() => runApp(
   MaterialApp(
@@ -39,7 +39,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    BusinessPage(),
+    DiscoverPage(),
+    Text('Placeholder Page'),
     Cart(),
   ];
 
@@ -64,8 +65,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search_rounded),
-            label: 'Search',
+            icon: Icon(Icons.location_pin),
+            label: 'Discover',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bar_chart),
+            label: 'My Stats',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart_rounded),
