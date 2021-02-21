@@ -158,7 +158,22 @@ class _DealsState extends State<Deals> {
                       style: TextStyle(color: LimeGreen),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => PopUp(
+                            url:
+                                "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.commitpoint.com%2Fassets%2Fimages%2Fproducts.png&f=1&nofb=1",
+                            itemName: currentDeal.itemName,
+                            description: currentDeal.itemDescription,
+                            oldPrice: currentDeal.itemOldPrice.toString(),
+                            newPrice: currentDeal.itemPrice.toString(),
+                            expirationDate: currentDeal.expiry,
+                            store: currentDeal.store,
+                            savesWasteOz: currentDeal.oz,
+                          ),
+                        );
+                      },
                       child: Container(
                         width: 25.0,
                         height: 25.0,
