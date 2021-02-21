@@ -8,13 +8,22 @@ import 'package:h4h/globalWidgets/GlobalVars.dart' as Globals;
 import 'package:h4h/globalWidgets/roundedDivider.dart';
 
 class DiscoverPage extends StatefulWidget {
+
+  String option = "NONE";
+
+  DiscoverPage(this.option);
+
   @override
-  _DiscoverPageState createState() => _DiscoverPageState();
+  _DiscoverPageState createState() => _DiscoverPageState(option);
 }
 
 class _DiscoverPageState extends State<DiscoverPage> {
+  String option = "";
+
+  _DiscoverPageState(this.option);
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { // TODO ACCOUNT FOR FILTER
     return Material(
       color: Colors.white,
         child: Column(

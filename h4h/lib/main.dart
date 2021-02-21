@@ -105,7 +105,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    DiscoverPage(),
+    DiscoverPage("NONE"),
     Text(
       'Index 2: School', // TODO - STATS
     ),

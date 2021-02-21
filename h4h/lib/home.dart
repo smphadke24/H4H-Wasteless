@@ -9,6 +9,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:h4h/categories.dart';
 import 'package:h4h/globalWidgets/GlobalVars.dart' as Globals;
 
+import 'discover.dart';
+
 class HomePage extends StatefulWidget {
 
   @override
@@ -225,23 +227,56 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 InkWell(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => BusinessPage(),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DiscoverPage("Dairy"),
+                      ),
+                    );
                   },
                   child: SingleFood("Dairy",
                       "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.mitrask.com%2Fwp-content%2Fuploads%2F2018%2F04%2Fdairy-product.png&f=1&nofb=1"),
                 ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                     context,
+                      MaterialPageRoute(
+                        builder: (context) => DiscoverPage("Fruits"),
+                      ),
+                  );
+                },
+                child:
                 SingleFood("Fruits",
                     "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.searchpng.com%2Fwp-content%2Fuploads%2F2018%2F12%2FFruits-PNG-HD-Transparent-Fruits.png&f=1&nofb=1"),
-                SingleFood("Vegetables",
+                ),
+                InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DiscoverPage("Vegetables"),
+                    ),
+                  );
+                },
+                child: SingleFood("Vegetables",
                     "https://www.kindpng.com/picc/m/599-5999759_fresh-vegetables-png-transparent-png.png"),
-                SingleFood("Baked Goods",
+                ),
+                InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DiscoverPage("Baked Goods"),
+                    ),
+                  );
+                },
+                child: SingleFood("Baked Goods",
                     "https://img.pngio.com/bakery-bread-baking-biscuits-png-clipart-baked-goods-baker-bakery-goods-png-728_696.jpg"),
+
+                ),
               ],
+
             ),
           ),
           SizedBox(height: 16.0),
