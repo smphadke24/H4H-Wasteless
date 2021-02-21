@@ -1,10 +1,36 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:h4h/main.dart';
 import './styleguide.dart';
+import 'package:h4h/globalWidgets/GlobalVars.dart' as Globals;
 
 class Login extends StatelessWidget {
+
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  _login(BuildContext cont) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
+    Globals.email = _emailController.text;
+    MaterialPageRoute(
+      builder: (cont) => MyApp(),
+    );
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext cont) {
     return Material(
       color: Colors.white,
       child: Container(
@@ -30,6 +56,7 @@ class Login extends StatelessWidget {
             ),
             SizedBox(height: 28.0),
             TextField(
+              controller: _emailController,
               style: TextStyle(fontSize: 18.0),
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.all(20),
@@ -48,6 +75,7 @@ class Login extends StatelessWidget {
             ),
             SizedBox(height: 24.0),
             TextField(
+              controller: _passwordController,
               style: TextStyle(fontSize: 18.0),
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.all(20),
@@ -97,12 +125,7 @@ class Login extends StatelessWidget {
                 ),
                 color: LimeGreen,
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MyApp(),
-                    ),
-                  );
+                  _login(cont);
                 },
                 child: Text(
                   "Login",

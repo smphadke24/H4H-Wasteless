@@ -5,6 +5,10 @@ import 'package:h4h/styleguide.dart';
 import 'package:h4h/businessPage/BusinessPage.dart';
 import './single_food.dart';
 import './single_store.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:flutter/foundation.dart';
+import 'package:h4h/categories.dart';
+import 'package:h4h/globalWidgets/GlobalVars.dart' as Globals;
 
 class HomePage extends StatefulWidget {
 
@@ -13,8 +17,36 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  Future<Map<String, String>> _getHomeInfo() async {
+    var map = Map<String, String>();
+    var temp = await firestore.collection('users').doc(Globals.email).get();
+    temp.data().forEach((key, value) {
+      map[key] = value.toString();
+    });
+    return map;
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext cont) {
+    return FutureBuilder(
+        future: _getHomeInfo(),
+        builder: (context, AsyncSnapshot<Map<String, String>> snapshot) {
+          if (snapshot.hasData) {
+            return _buildPage(cont, snapshot.data);
+          } else {
+            return Container(
+              margin: EdgeInsets.all(40),
+              child: CircularProgressIndicator(),
+            );
+          }
+        }
+    );
+  }
+
+  Widget _buildPage(BuildContext context, Map<String, String> info) {
     return Container(
       padding: EdgeInsets.all(32.0),
       child: Column(
@@ -35,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(fontSize: 30, color: Colors.black),
                       ),
                       Text(
-                        "Susan ",
+                        info['name'] + " ",
                         style: TextStyle(
                             fontSize: 30,
                             color: Colors.black,
@@ -56,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Text(
-                        "Santa Clara, CA",
+                        info['location'],
                         style: TextStyle(
                           fontSize: 20.0,
                           color: LimeGreen,
@@ -93,12 +125,12 @@ class _HomePageState extends State<HomePage> {
               CircularPercentIndicator(
                 radius: MediaQuery.of(context).size.width * 0.25,
                 lineWidth: 10.0,
-                percent: 0.7,
+                percent: double.tryParse(info['points'])/200,
                 center: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "+140pts",
+                      "+" + info['points'] + "pts",
                       style: TextStyle(
                         color: LimeGreen,
                         fontWeight: FontWeight.bold,
@@ -106,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Text(
-                      "140/200",
+                      info['points'] + "/200",
                       style: TextStyle(
                         color: LimeGreen,
                       ),
@@ -132,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "XXX lbs",
+                      "X,XXX lbs",
                       style: TextStyle(
                         fontSize: 20.0,
                         color: Colors.white,
