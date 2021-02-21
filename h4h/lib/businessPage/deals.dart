@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:h4h/styleguide.dart';
 import 'package:h4h/pop_up.dart';
 
+import '../styleguide.dart';
+import '../styleguide.dart';
+import '../styleguide.dart';
+
 /* TEMP LIST OF DEALS */
 List testDeals = [
   {"brand": "Smith Brothers", "item": "1% Milk", "price": 2.00},
@@ -52,11 +56,10 @@ class _DealsState extends State<Deals> {
 
   Widget _buildList(BuildContext context) {
     return Container(
-      child: GridView.count(
+      child: ListView(
         physics: ScrollPhysics(),
         shrinkWrap: true,
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        crossAxisCount: 3, //3 tiles in view
         children: testDeals.map((deal) => _buildTile(context, deal)).toList(),
       ),
     );
@@ -82,7 +85,7 @@ class _DealsState extends State<Deals> {
         //sizing of deals squares
         width: MediaQuery.of(context).size.width * 0.3,
         height: MediaQuery.of(context).size.width * 0.3,
-        margin: EdgeInsets.all(5),
+        margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: LightGrey,
           borderRadius: RoundedBox,
@@ -90,31 +93,68 @@ class _DealsState extends State<Deals> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(  //text
-              padding: EdgeInsets.only(top: 3, left: 8, right: 8),
-              child: Text(
-                currentDeal.brand + " " + currentDeal.item,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  height: 1.2,
-                  fontFamily: "AvenirMedium",
-                  fontSize: BodyTextSize,
-                  fontWeight: FontWeight.w900,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Align(  //item brand and name
+                  alignment: Alignment.topLeft,
+                  child: Container(
+                    padding: EdgeInsets.only(left: 20),
+                    child: Text(
+                    currentDeal.brand + " " + currentDeal.item,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontFamily: "AvenirMedium",
+                      fontSize: BodyTextSize * 1.5,
+                      fontWeight: FontWeight.w900,
+                    ),
+                    ),
+                  ),
+                ),
+                Align(
+                  child: Container(
+                    width: 60,
+                    height: 20,
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.only(right: 20),
+                    decoration: BoxDecoration(
+                      color: DarkGrey,
+                      borderRadius: RoundedBox,
+                    ),
+                    child: Text(
+                      'TYPE',
+                      style: TextStyle(color: Colors.white, fontSize: BodyTextSize),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Align(  //item description
+              alignment: Alignment.topLeft,
+                child: Container(
+                  padding: EdgeInsets.only(left: 20, right: 100),
+                  child: Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontFamily: "AvenirMedium",
+                    fontSize: BodyTextSize,
+                  ),
                 ),
               ),
             ),
             Container(  //pricing
               alignment: Alignment.bottomLeft,
-              padding: EdgeInsets.only(left: 10.0, top: 15.0, right: 10.0),
+              padding: EdgeInsets.only(left: 20.0, top: 15.0, right: 20.0),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "\$" + currentDeal.price.toString(),
+                      "\$" + currentDeal.price.toStringAsFixed(2),
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontFamily: "AvenirMedium",
-                        fontSize: BodyTextSize * 1.25,
+                        fontSize: BodyTextSize * 1.5,
                         fontWeight: FontWeight.w900,
                         color: LimeGreen,
                       ),

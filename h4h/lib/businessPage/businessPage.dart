@@ -34,40 +34,52 @@ class _BusinessPageState extends State<BusinessPage> {
       width: MediaQuery.of(context).size.width, //header approximately 18% of screen height
       decoration: BoxDecoration(
         color: LimeGreen,
-        borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child:  Container(
+                margin: EdgeInsets.only(left: 30.0, top: 30.0),
+                child: Icon(Icons.arrow_back, color: Colors.white),
+              ),
+            ),
+          ),
           Container(
             //divider
             width: MediaQuery.of(context).size.width * 0.1,
-            margin: EdgeInsets.only(top: 60, bottom: 10),
+            margin: EdgeInsets.only(top: 20, bottom: 10),
             child: RoundedDivider(context),
           ),
-          Text(
-            'Store',
-            style: TextStyle(
-              fontSize: BodyTextSize * 2,
-              fontFamily: "AvenirMedium",
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+          Row(  //location information
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Store' + ' | ',
+                style: TextStyle(
+                  fontSize: BodyTextSize * 2,
+                  fontFamily: "AvenirMedium",
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                'Location',
+                  style: TextStyle(
+                    fontSize: BodyTextSize * 2,
+                    fontFamily: "AvenirMedium",
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+              )
+            ],
           ),
-          SizedBox(
-            height: 5.0,
-          ),
-          Text(
-            'Location',
-            style: TextStyle(
-              fontSize: BodyTextSize * 1.3,
-              fontFamily: "AvenirMedium",
-              fontWeight: FontWeight.normal,
-              color: Colors.white,
-            ),
-          ),
-        ],
+        ]
       ),
     );
   }

@@ -247,7 +247,8 @@ class _HomePageState extends State<HomePage> {
           SingleStore(
               "QFC",
               "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frmkcdn.successfactors.com%2F2fb422b4%2Fc21f58b6-2354-4e38-8f41-8.jpg&f=1&nofb=1",
-              "123 Elmo Way"),
+              "123 Elmo Way"
+          ),
           SingleStore(
               "Safeway",
               "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fa57.foxnews.com%2Fa57.foxnews.com%2Fstatic.foxnews.com%2Ffoxnews.com%2Fcontent%2Fuploads%2F2018%2F09%2F640%2F320%2F1862%2F1048%2Fistock-485238536.jpg%3Fve%3D1%26tl%3D1%3Fve%3D1%26tl%3D1&f=1&nofb=1",

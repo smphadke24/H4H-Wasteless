@@ -7,10 +7,10 @@ import './cart.dart';
 import './businessPage/businessPage.dart';
 
 void main() => runApp(
-      MaterialApp(
-        home: Login(),
-      ),
-    );
+  MaterialApp(
+    home: Login(),
+  ),
+);
 
 /// This is the main application widget.
 class MyApp extends StatelessWidget {
@@ -40,9 +40,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     BusinessPage(),
-    Text(
-      'Index 2: School',
-    ),
     Cart(),
   ];
 
@@ -69,10 +66,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           BottomNavigationBarItem(
             icon: Icon(Icons.search_rounded),
             label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map_rounded),
-            label: 'Discover',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart_rounded),
