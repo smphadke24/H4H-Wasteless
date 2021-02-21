@@ -58,7 +58,7 @@ class _BusinessPageState extends State<BusinessPage> {
                 Navigator.pop(context);
               },
               child:  Container(
-                margin: EdgeInsets.only(left: 30.0, top: 60.0),
+                margin: EdgeInsets.only(top: 60.0),
                 child: Icon(Icons.arrow_back, color: Colors.white),
               ),
             ),

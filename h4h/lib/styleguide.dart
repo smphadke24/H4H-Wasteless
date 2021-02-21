@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 //GLOBAL
 //------------------------------------------------------------------------------
 
-const Color LimeGreen = Color(0xff88D612);    //Lime Green
-const Color DarkGrey = Color(0xff111D13);     //Dark Grey
-const Color Grey = Color(0xffB7B7B7);         //Grey
-const Color LightGrey = Color(0xffebf4ed);    //LightGrey
+const Color LimeGreen = Color(0xff88D612); //Lime Green
+const Color DarkGrey = Color(0xff3E474A); //Dark Grey
+const Color Grey = Color(0xffB7B7B7); //Grey
+const Color LightGrey = Color(0xffebf4ed); //LightGrey
+const Color BlueGrey = Color(0xff636A6D); //BlueGrey
 
 const BorderRadius RoundedBox = BorderRadius.all(Radius.circular(20.0));
 
