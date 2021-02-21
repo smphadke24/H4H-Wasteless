@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:h4h/styleguide.dart';
 import 'package:h4h/pop_up.dart';
 
-class DealItem extends StatelessWidget {
+class CartItem extends StatelessWidget {
   final String itemName;
   final String itemDescription;
   final String url;
@@ -10,7 +10,7 @@ class DealItem extends StatelessWidget {
   final String itemOldPrice;
   final String store;
 
-  DealItem(
+  CartItem(
     this.itemName,
     this.itemDescription,
     this.url,
@@ -22,27 +22,27 @@ class DealItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: LightGrey,),
-      padding: EdgeInsets.only(
-        left: 10,
-        right: 25,
-        top: 10,
-        bottom: 10,
-      ),
-      margin: EdgeInsets.only(bottom: 12.0),
+      margin: EdgeInsets.only(bottom: 20.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           InkWell(
             child: Container(
-              width: 100.0,
-              height: 100.0,
+              padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(url),
-                  fit: BoxFit.fill,
+                borderRadius: BorderRadius.circular(30),
+                color: LightGrey,
+              ),
+              child: Container(
+                width: 80.0,
+                height: 80.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(url),
+                    fit: BoxFit.fitHeight,
+                  ),
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
-                borderRadius: BorderRadius.circular(10.0),
               ),
             ),
             onTap: () {
@@ -59,7 +59,7 @@ class DealItem extends StatelessWidget {
             },
           ),
           Container(
-            width: MediaQuery.of(context).size.width * 0.35,
+            width: MediaQuery.of(context).size.width * 0.4,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -67,29 +67,37 @@ class DealItem extends StatelessWidget {
                   itemName,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
                 ),
+                SizedBox(height: 5),
                 Text(
-                  store,
+                  store + ", 123 Paul's Main Street",
                   overflow: TextOverflow.ellipsis,
+                  style: TextStyle(color: LimeGreen),
                 ),
               ],
             ),
           ),
           Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
+              Text(
+                "1x",
+                style: TextStyle(fontSize: 14.0, color: Grey),
+              ),
+              SizedBox(height: 6),
               Text(
                 "\$$itemPrice",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 16.0,
+                  fontSize: 18.0,
+                  color: LimeGreen,
                 ),
               ),
               Text(
                 "\$$itemOldPrice",
                 style: TextStyle(
-                    decoration: TextDecoration.lineThrough,
-                    fontStyle: FontStyle.italic,
-                    color: Grey),
+                  decoration: TextDecoration.lineThrough,
+                  fontStyle: FontStyle.italic,
+                ),
               ),
             ],
           ),

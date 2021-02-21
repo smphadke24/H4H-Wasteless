@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:h4h/styleguide.dart';
-import './deal_item.dart';
+import './cart_item.dart';
 import 'package:h4h/globalWidgets/roundedDivider.dart';
 
 class Cart extends StatefulWidget {
@@ -64,46 +64,37 @@ class _CartState extends State<Cart> {
             height: MediaQuery.of(context).size.height * 0.5,
             child: ListView(
               children: [
-                DealItem(
+                CartItem(
                   "Milk",
                   "That good good 2% milk32gwerg",
-                  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi5.walmartimages.com%2Fasr%2F83f533c3-3234-4bea-80bf-a0f9a43cd279_2.9b223f40bab27c513ba64f9f0e3fc2d9.jpeg&f=1&nofb=1",
+                  "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpngimg.com%2Fuploads%2Fmilk%2Fmilk_PNG12732.png&f=1&nofb=1",
                   "1.99",
                   "3.99",
                   "QFC",
                 ),
-                DealItem(
+                CartItem(
                   "Milk",
-                  "That good good 2% milkgre",
-                  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi5.walmartimages.com%2Fasr%2F83f533c3-3234-4bea-80bf-a0f9a43cd279_2.9b223f40bab27c513ba64f9f0e3fc2d9.jpeg&f=1&nofb=1",
+                  "That good good 2% milk32gwerg",
+                  "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpngimg.com%2Fuploads%2Fmilk%2Fmilk_PNG12732.png&f=1&nofb=1",
                   "1.99",
                   "3.99",
                   "QFC",
                 ),
-                DealItem(
+                CartItem(
                   "Milk",
-                  "That good good 2% milk12342",
-                  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi5.walmartimages.com%2Fasr%2F83f533c3-3234-4bea-80bf-a0f9a43cd279_2.9b223f40bab27c513ba64f9f0e3fc2d9.jpeg&f=1&nofb=1",
+                  "That good good 2% milk32gwerg",
+                  "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpngimg.com%2Fuploads%2Fmilk%2Fmilk_PNG12732.png&f=1&nofb=1",
                   "1.99",
                   "3.99",
-                  "Safeway"
+                  "QFC",
                 ),
-                DealItem(
+                CartItem(
                   "Milk",
-                  "That good good 2% milkwrtehwrthwerth",
-                  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi5.walmartimages.com%2Fasr%2F83f533c3-3234-4bea-80bf-a0f9a43cd279_2.9b223f40bab27c513ba64f9f0e3fc2d9.jpeg&f=1&nofb=1",
+                  "That good good 2% milk32gwerg",
+                  "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpngimg.com%2Fuploads%2Fmilk%2Fmilk_PNG12732.png&f=1&nofb=1",
                   "1.99",
                   "3.99",
-                  "Safeway"
-                ),
-                DealItem(
-                  "Milk",
-                  "That good good 2% milkewgwretshwetrg",
-                  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi5.walmartimages.com%2Fasr%2F83f533c3-3234-4bea-80bf-a0f9a43cd279_2.9b223f40bab27c513ba64f9f0e3fc2d9.jpeg&f=1&nofb=1",
-                  "1.99",
-                  "3.99",
-                  "Safeway"
-
+                  "QFC",
                 ),
               ],
             ),
