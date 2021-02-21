@@ -279,7 +279,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
 
   Widget _buildOtherDeals(BuildContext context) {
     return Container(
-      child: Deals.forStore("ALL"),
+      child: Deals.forStore("ALL", false),
     );
   }
 }

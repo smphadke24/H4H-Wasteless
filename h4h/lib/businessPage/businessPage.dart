@@ -163,7 +163,7 @@ class _BusinessPageState extends State<BusinessPage> {
             ),
           ],
         ),
-          Deals.forStore(store),
+          Deals.forStore(store, true),
       ],
     ));
   }

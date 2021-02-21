@@ -30,19 +30,22 @@ class Deal {
 
 class Deals extends StatefulWidget {
   String store = "";
+  bool t;
 
-  Deals.forStore(String s) {
+  Deals.forStore(String s, bool t) {
     store = s;
+    this.t = t;
   }
 
   @override
-  _DealsState createState() => _DealsState(store);
+  _DealsState createState() => _DealsState(store, t);
 }
 
 class _DealsState extends State<Deals> {
   var store = "";
+  bool t = false;
   List<Map<String, dynamic>> filtered = [];
-  _DealsState(this.store);
+  _DealsState(this.store, this.t);
 
   Widget build(BuildContext context) {
     if (store != "ALL") {
@@ -55,13 +58,15 @@ class _DealsState extends State<Deals> {
       filtered = Globals.products;
     }
     return Container(
-      child: SingleChildScrollView(child: _buildList(context)),
+      child: SingleChildScrollView(child: _buildList(context, t)),
     );
   }
 
-  Widget _buildList(BuildContext context) {
+  Widget _buildList(BuildContext context, bool t) {
+    double x = MediaQuery.of(context).size.height * 0.29;
+    if (t) { x = MediaQuery.of(context).size.height * 0.40; }
     return Container(
-      height: MediaQuery.of(context).size.height * 0.29,
+      height: x,
       margin: EdgeInsets.only(left: 22, right: 32, bottom: 22),
       padding: const EdgeInsets.all(8),
       child: ListView(
