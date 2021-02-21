@@ -15,24 +15,23 @@ class _BusinessPageState extends State<BusinessPage> {
   Widget build(BuildContext context) {
     return Material(
       color: Colors.white,
-      child: Column(
-          children: [
-            _buildHeader(context),
-            _buildSearch(context),
-            _buildBody(context),
-          ],
-        ),
+      child: SingleChildScrollView(
+        child: Column(
+            children: [
+              _buildHeader(context),
+              _buildSearch(context),
+              _buildBody(context),
+            ],
+          ),
+      ),
     );
   }
 
   //header
   Widget _buildHeader(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height *
-          0.18, //header approximately 18% of screen height
-      width: MediaQuery.of(context)
-          .size
-          .width, //header approximately 18% of screen height
+      height: MediaQuery.of(context).size.height * 0.18, //header approximately 18% of screen height
+      width: MediaQuery.of(context).size.width, //header approximately 18% of screen height
       decoration: BoxDecoration(
         color: LimeGreen,
         borderRadius: BorderRadius.only(
@@ -76,40 +75,50 @@ class _BusinessPageState extends State<BusinessPage> {
   //search bar and shopping icon
   Widget _buildSearch(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-                width: MediaQuery.of(context).size.width - 40,
-                child: SearchBar()),
-          ],
-        ));
+      margin: EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width * 0.75,
+            child: SearchBar()
+          ),
+          Container(
+            margin: EdgeInsets.only(bottom: 20.0),
+            child: Icon( //shopping bag icon
+              Icons.shopping_bag, 
+              size: BodyTextSize * 2.5, 
+              color: LimeGreen
+            ),
+          ),
+        ],
+      )
+    );
   }
 
   //page body
   Widget _buildBody(BuildContext context) {
     return Container(
-        child: Column(
-      children: [
-        Row(
-          children: [
-            Container(
-                padding: EdgeInsets.only(left: 32, bottom: 15.0),
-                child: Icon(
-                  Icons.shopping_basket_outlined,
-                  color: LimeGreen,
-                )),
-            Container(
-              margin: EdgeInsets.only(bottom: 16.0),
-              child: Text(
-                "  Select a Food",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                    fontSize: 16.0),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                  padding: EdgeInsets.only(left: 32, bottom: 15.0),
+                  child: Icon(
+                    Icons.shopping_basket_outlined,
+                    color: LimeGreen,
+                  )),
+              Container(
+                margin: EdgeInsets.only(left: 10.0, bottom: 16.0),
+                child: Text(
+                  "Select a Food",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 16.0),
+                ),
               ),
-            ),
           ],
         ),
         Container(
@@ -118,7 +127,7 @@ class _BusinessPageState extends State<BusinessPage> {
             right: 32,
             bottom: 12,
           ),
-          child: FoodCategories(context),
+          child: FoodCategories(context)
         ),
         SizedBox(height: 16),
         Row(
@@ -130,19 +139,21 @@ class _BusinessPageState extends State<BusinessPage> {
                   color: LimeGreen,
                 )),
             Container(
-              margin: EdgeInsets.only(bottom: 16.0),
+              margin: EdgeInsets.only(left: 10.0, bottom: 16.0),
               child: Text(
-                "  Avaliable Deals",
+                "Avaliable Deals",
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                    fontSize: 16.0),
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontSize: 16.0
+                ),
               ),
             ),
           ],
         ),
         Deals(),
       ],
-    ));
+    ),
+    );
   }
 }

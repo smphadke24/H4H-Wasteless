@@ -12,7 +12,7 @@ class SingleStore extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 250.0,
-      height: 150.0,
+      height: MediaQuery.of(context).size.height * 0.14,
       margin: EdgeInsets.only(right: 16.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(

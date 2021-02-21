@@ -52,14 +52,12 @@ class _DealsState extends State<Deals> {
 
   Widget _buildList(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 22, right: 32, bottom: 22),
-      child: Expanded(
-        child: GridView.count(
-          shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          crossAxisCount: 3, //3 tiles in view
-          children: testDeals.map((deal) => _buildTile(context, deal)).toList(),
-        ),
+      child: GridView.count(
+        physics: ScrollPhysics(),
+        shrinkWrap: true,
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        crossAxisCount: 3, //3 tiles in view
+        children: testDeals.map((deal) => _buildTile(context, deal)).toList(),
       ),
     );
   }
@@ -72,8 +70,7 @@ class _DealsState extends State<Deals> {
         showDialog(
           context: context,
           builder: (BuildContext context) => PopUp(
-            url:
-                "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.commitpoint.com%2Fassets%2Fimages%2Fproducts.png&f=1&nofb=1",
+            url: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.commitpoint.com%2Fassets%2Fimages%2Fproducts.png&f=1&nofb=1",
             itemName: currentDeal.item,
             description: "BLAH BLAU BALFEHIUEWHFWEFNIJKEWNFLWENIF",
             oldPrice: currentDeal.price.toString(),
@@ -82,6 +79,7 @@ class _DealsState extends State<Deals> {
         );
       },
       child: Container(
+        //sizing of deals squares
         width: MediaQuery.of(context).size.width * 0.3,
         height: MediaQuery.of(context).size.width * 0.3,
         margin: EdgeInsets.all(5),
@@ -92,7 +90,7 @@ class _DealsState extends State<Deals> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
+            Container(  //text
               padding: EdgeInsets.only(top: 3, left: 8, right: 8),
               child: Text(
                 currentDeal.brand + " " + currentDeal.item,
@@ -105,7 +103,7 @@ class _DealsState extends State<Deals> {
                 ),
               ),
             ),
-            Container(
+            Container(  //pricing
               alignment: Alignment.bottomLeft,
               padding: EdgeInsets.only(left: 10.0, top: 15.0, right: 10.0),
               child: Row(
@@ -121,7 +119,7 @@ class _DealsState extends State<Deals> {
                         color: LimeGreen,
                       ),
                     ),
-                    Container(
+                    Container(  //plus button
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: LimeGreen,
