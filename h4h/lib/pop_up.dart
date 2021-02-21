@@ -27,13 +27,12 @@ class PopUp extends StatelessWidget {
     return new Dialog(
       backgroundColor: Colors.transparent,
       insetPadding: EdgeInsets.all(10),
-      child: Container(
+      child: SingleChildScrollView(
+       child:Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30.0),
           color: Colors.white,
         ),
-        width: double.infinity,
-        height: double.infinity,
         padding: EdgeInsets.all(25),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -128,7 +127,7 @@ class PopUp extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "\$ $newPrice",
+                        "\$newPrice",
                         style: TextStyle(
                           color: LimeGreen,
                           fontSize: 30.0,
@@ -255,6 +254,7 @@ class PopUp extends StatelessWidget {
             ),
           ],
         ),
+      ),
       ),
     );
   }
