@@ -144,7 +144,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
             padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: Grey,
+              color: MediumGrey,
             ),
             child: Row(  //Your Stats Label
               mainAxisAlignment: MainAxisAlignment.center,
@@ -171,7 +171,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
             padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: Grey,
+              color: MediumGrey,
             ),
             child: Row(  //Your Stats Label
               mainAxisAlignment: MainAxisAlignment.center,
@@ -198,7 +198,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
             padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: Grey,
+              color: MediumGrey,
             ),
             child: Row(  //Your Stats Label
               mainAxisAlignment: MainAxisAlignment.center,
@@ -225,7 +225,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
             padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: Grey,
+              color: MediumGrey,
             ),
             child: Row(  //Your Stats Label
               mainAxisAlignment: MainAxisAlignment.center,
