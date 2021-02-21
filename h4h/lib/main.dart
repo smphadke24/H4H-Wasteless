@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:h4h/discover.dart';
+import 'package:h4h/stats.dart';
 import 'package:h4h/styleguide.dart';
 import 'package:h4h/globalWidgets/GlobalVars.dart' as Globals;
 
@@ -106,9 +107,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     DiscoverPage(),
-    Text(
-      'Index 2: School', // TODO - STATS
-    ),
+    Stats(),
     Cart(),
   ];
 
