@@ -4,6 +4,8 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:h4h/styleguide.dart';
 import './single_store.dart';
 import 'categories.dart';
+import 'styleguide.dart';
+import 'styleguide.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -95,42 +97,74 @@ class _HomePageState extends State<HomePage> {
       preferredSize: Size(double.infinity, 100),
       child: Container(
         margin: EdgeInsets.only(bottom: 32.0, top: 32.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+        child: Stack(
           children: [
-            Row(
-              children: [
-                Text(
-                  "Hello, ",
-                  style: TextStyle(fontSize: 30, color: Colors.black),
-                ),
-                Text(
-                  "Susan ",
-                  style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
+            Positioned(
+              top: 8,
+              right: 8,
+              child: Icon(                    
+                Icons.shopping_bag, 
+                size: BodyTextSize * 4,
+                color: LimeGreen
+              ),
             ),
-            SizedBox(
-              height: 5.0,
-            ),
-            Row(
-              children: [
-                Text(
-                  "Location | ",
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: LimeGreen,
-                  ),
+            Positioned(
+              right: 4,
+              top: 14,
+              child: Container(
+                width: 20,
+                height: 20,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: DarkGrey,
                 ),
-                Text(
-                  "Santa Clara, CA",
+                child: Text(
+                  '15', 
                   style: TextStyle(
-                    fontSize: 20.0,
-                    color: LimeGreen,
+                    color: Colors.white, 
+                    fontSize: BodyTextSize),
                   ),
+              ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      "Hello, ",
+                      style: TextStyle(fontSize: 30, color: Colors.black),
+                    ),
+                    Text(
+                      "Susan ",
+                      style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 5.0,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Location | ",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: LimeGreen,
+                      ),
+                    ),
+                    Text(
+                      "Santa Clara, CA",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: LimeGreen,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
