@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:h4h/deal_item.dart';
 import 'package:h4h/styleguide.dart';
+import 'package:h4h/globalWidgets/GlobalVars.dart' as Globals;
 
 class PopUp extends StatelessWidget {
   final String url;
@@ -65,7 +67,7 @@ class PopUp extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "ADD EXPIRATION VARIABLE",
+                    "Best before " + expirationDate,
                     style: TextStyle(
                       fontSize: 16.0,
                       color: LimeGreen,
@@ -82,7 +84,7 @@ class PopUp extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "ADD LOCATION VARIABLE",
+                    store,
                     style: TextStyle(
                       fontSize: 16.0,
                       color: LimeGreen,
@@ -155,7 +157,7 @@ class PopUp extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "16oz",
+                              savesWasteOz + "oz",
                               style: TextStyle(
                                 color: LimeGreen,
                                 fontWeight: FontWeight.bold,
@@ -191,7 +193,7 @@ class PopUp extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "+16",
+                              "+" + (int.tryParse(savesWasteOz)/2).toString(),
                               style: TextStyle(
                                 color: LimeGreen,
                                 fontWeight: FontWeight.bold,
@@ -223,7 +225,38 @@ class PopUp extends StatelessWidget {
                   borderRadius: BorderRadius.circular(50.0),
                 ),
                 color: LimeGreen,
-                onPressed: () {},
+                onPressed: () {
+                  Globals.cart.add(DealItem(itemName, description, url, newPrice, oldPrice, store, savesWasteOz));
+                  Widget okButton = TextButton(
+                    child: Text("Okay", style: TextStyle(
+                      color: LimeGreen,
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                    )),
+                    onPressed: () { Navigator.pop(context); },
+                  );
+
+                  // set up the AlertDialog
+                  AlertDialog alert = AlertDialog(
+                    content: Text(
+                        "You added" + itemName + " to your cart!",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                    ),
+                    actions: [
+                      okButton,
+                    ],
+                    elevation: 20,
+                    backgroundColor: LightGrey,
+                  );
+
+                  // show the dialog
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return alert;
+                    },
+                  );
+                },
                 child: Text(
                   "Add to Cart",
                   style: TextStyle(

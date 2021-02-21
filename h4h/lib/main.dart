@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:h4h/discover.dart';
 import 'package:h4h/styleguide.dart';
 import 'package:h4h/globalWidgets/GlobalVars.dart' as Globals;
 
 import './home.dart';
 import './businessPage/businessPage.dart';
 import './cart.dart';
+import 'businessPage/deals.dart';
 import 'login.dart';
 
 Future<void> main() async {
@@ -26,24 +28,36 @@ class MyApp extends StatelessWidget {
 
   Future<int> _getHomeInfo() async {
     var map = Map<String, String>();
+    var map2 = Map<String, String>();
     var temp = await firestore.collection('users').doc(Globals.email).get();
     print('a');
     var temp2 = await firestore.collection('stores').get();
+    DocumentReference temp3;
     print('b');
     temp.data().forEach((key, value) {
       map[key] = value.toString();
     });
     print('a');
-    temp2.docs.forEach((element) {
+    temp2.docs.forEach((element) async {
+      temp3 = element.reference;
       var storeMap = Map<String, String>();
       if (element.exists) {
         print('b');
         element.data().forEach((key, value) {
           storeMap[key] = value.toString();
         });
+        var t = await temp3.collection('listings').get();
+        t.docs.forEach((elt) {
+          var myMap = Map<String, dynamic>();
+          elt.data().forEach((key, value) {
+            myMap[key] = value.toString();
+          });
+          Globals.products.add(myMap);
+        });
       }
       Globals.stores.add(storeMap);
     });
+
     print('Got info.');
     Globals.info = map;
     Globals.future = true;
@@ -91,9 +105,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    BusinessPage(),
+    DiscoverPage(),
     Text(
-      'Index 2: School',
+      'Index 2: School', // TODO - STATS
     ),
     Cart(),
   ];
@@ -119,12 +133,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search_rounded),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.map_rounded),
             label: 'Discover',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bar_chart_rounded),
+            label: 'My Stats',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart_rounded),

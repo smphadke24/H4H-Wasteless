@@ -1,50 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:h4h/styleguide.dart';
 import 'package:h4h/pop_up.dart';
+import 'package:h4h/globalWidgets/GlobalVars.dart' as Globals;
 
-/* TEMP LIST OF DEALS */
-List testDeals = [
-  {"brand": "Smith Brothers", "item": "1% Milk", "price": 2.00},
-  {"brand": "Dole", "item": "Premium Bananas", "price": 0.99},
-  {"brand": "Tyson", "item": "Grilled Asparagus", "price": 1.49},
-  {"brand": "Beecher's", "item": "Cheddar Cheese", "price": 1.50},
-  {"brand": "Kringle's Best", "item": "Croisants", "price": 2.60},
-  {
-    "brand": "Evergreen",
-    "item": "Broccoli Flotteretes",
-    "price": 0.70,
-  },
-  {
-    "brand": "Jif",
-    "item": "Creamy Peanut Butter",
-    "price": 2.00,
-  },
-  {
-    "brand": "Bush's",
-    "item": "Baked Beans",
-    "price": 0.82,
-  },
-  {
-    "brand": "Folgers",
-    "item": "Special Roast Coffee",
-    "price": 3.28,
-  },
-  /*
-  {
-    "brand": "",
-    "item": "",
-    "price": ,
-  },
-  */
-];
+class Deal {
+  String itemName;
+  String itemDescription;
+  String url;
+  String itemPrice;
+  String itemOldPrice;
+  String store;
+  String expiry;
+  String oz;
+
+  Deal(this.itemName,
+      this.itemDescription,
+      this.url,
+      this.itemPrice,
+      this.itemOldPrice,
+      this.store,
+      this.expiry);
+
+  Deal.fromMap(Map<String, dynamic> map)
+      : itemName = map['name'].toString(),
+        oz = map['ozFoodSaved'],
+        itemDescription = map['sDescription'].toString(),
+        itemPrice = map['newprice'].toString(),
+        itemOldPrice = map['oldprice'].toString(),
+        store = map['store'].toString() + " - " + map['location'].toString(),
+        expiry = map['expiry'].toString(),
+        url = map['url'].toString() ?? "https://lh3.googleusercontent.com/proxy/OxgJrFW4vZ3FM-h4xJukhQInsEnrNS5jpNUvlgherKEDf9AU2Aj8LxWRqGLJBTYtcTBPqCqMaWzgX9dVOIQb9gWvfSQG2DW6bYZ-Vmslwa3L1Kl499O29yprBkH9QT3I";
+}
 
 class Deals extends StatefulWidget {
+
+  String store = "";
+
+  Deals.forStore(String s) {
+    store = s;
+  }
+
   @override
-  _DealsState createState() => _DealsState();
+  _DealsState createState() => _DealsState(store);
 }
 
 class _DealsState extends State<Deals> {
+
+  var store = "";
+  List<Map<String, dynamic>> filtered = [];
+  _DealsState(this.store);
+
   Widget build(BuildContext context) {
+    if (store != "ALL") {
+      for (int i = 0; i < Globals.products.length; i++) {
+        if (Globals.products[i]['store'] == store) {
+          filtered.add(Globals.products[i]);
+        }
+      }
+    } else {
+      filtered = Globals.products;
+    }
     return Container(
       child: SingleChildScrollView(child: _buildList(context)),
     );
@@ -58,7 +73,7 @@ class _DealsState extends State<Deals> {
           shrinkWrap: true,
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           crossAxisCount: 3, //3 tiles in view
-          children: testDeals.map((deal) => _buildTile(context, deal)).toList(),
+          children: filtered.map((deal) => _buildTile(context, deal)).toList(),
         ),
       ),
     );
@@ -74,10 +89,13 @@ class _DealsState extends State<Deals> {
           builder: (BuildContext context) => PopUp(
             url:
                 "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.commitpoint.com%2Fassets%2Fimages%2Fproducts.png&f=1&nofb=1",
-            itemName: currentDeal.item,
-            description: "BLAH BLAU BALFEHIUEWHFWEFNIJKEWNFLWENIF",
-            oldPrice: currentDeal.price.toString(),
-            newPrice: currentDeal.price.toString(),
+            itemName: currentDeal.itemName,
+            description: currentDeal.itemDescription,
+            oldPrice: currentDeal.itemOldPrice.toString(),
+            newPrice: currentDeal.itemPrice.toString(),
+            expirationDate: currentDeal.expiry,
+            store: currentDeal.store,
+            savesWasteOz: currentDeal.oz,
           ),
         );
       },
@@ -95,7 +113,7 @@ class _DealsState extends State<Deals> {
             Container(
               padding: EdgeInsets.only(top: 3, left: 8, right: 8),
               child: Text(
-                currentDeal.brand + " " + currentDeal.item,
+                currentDeal.itemName,// + " " + currentDeal.itemDescription,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   height: 1.2,
@@ -112,7 +130,7 @@ class _DealsState extends State<Deals> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "\$" + currentDeal.price.toString(),
+                      "\$" + currentDeal.itemPrice.toString(),
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontFamily: "AvenirMedium",
@@ -138,22 +156,4 @@ class _DealsState extends State<Deals> {
       ),
     );
   }
-}
-
-//TODO: Eventually connect to Firebase
-class Deal {
-  final String brand;
-  final String item;
-  final double price;
-
-  Deal.fromMap(Map<String, dynamic> map)
-      : assert(map['brand'] != null),
-        assert(map['item'] != null),
-        assert(map['price'] != null),
-        brand = map['brand'],
-        item = map['item'],
-        price = map['price'];
-
-  @override
-  String toString() => "Match<$brand:$price>";
 }

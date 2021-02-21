@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:h4h/styleguide.dart';
 
+import 'businessPage/businessPage.dart';
+
 class SingleFood extends StatelessWidget {
   final String foodName;
   final String url;
@@ -21,12 +23,22 @@ class SingleFood extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Container(
-            height: 130.0,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(url),
-                fit: BoxFit.fitHeight,
+          InkWell(
+            onTap: () => {
+              // Navigator.push(
+              // context,
+              //   MaterialPageRoute(
+              //     builder: (context) => DiscoverPage(foodName),
+              //   ),
+              // ),
+            },
+            child: Container(
+              height: 130.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(url),
+                  fit: BoxFit.fitHeight,
+                ),
               ),
             ),
           ),

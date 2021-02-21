@@ -7,11 +7,21 @@ import 'package:h4h/globalWidgets/roundedDivider.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class BusinessPage extends StatefulWidget {
+  var store = "";
+  var loc = "";
+
+  BusinessPage(this.store, this.loc);
+
   @override
-  _BusinessPageState createState() => _BusinessPageState();
+  _BusinessPageState createState() => _BusinessPageState(store, loc);
 }
 
 class _BusinessPageState extends State<BusinessPage> {
+  var store = "";
+  var loc = "";
+
+  _BusinessPageState(this.store, this.loc);
+
   Widget build(BuildContext context) {
     return Material(
       color: Colors.white,
@@ -41,14 +51,26 @@ class _BusinessPageState extends State<BusinessPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-            //divider
-            width: MediaQuery.of(context).size.width * 0.1,
-            margin: EdgeInsets.only(top: 60, bottom: 10),
-            child: RoundedDivider(context),
+          Positioned(
+            top: 0, left: 0,
+            child: InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child:  Container(
+                margin: EdgeInsets.only(left: 30.0, top: 60.0),
+                child: Icon(Icons.arrow_back, color: Colors.white),
+              ),
+            ),
           ),
+          // Container(
+          //   //divider
+          //   width: MediaQuery.of(context).size.width * 0.1,
+          //   margin: EdgeInsets.only(top: 60, bottom: 10),
+          //   child: RoundedDivider(context),
+          // ),
           Text(
-            'Store',
+            store,
             style: TextStyle(
               fontSize: BodyTextSize * 2,
               fontFamily: "AvenirMedium",
@@ -60,7 +82,7 @@ class _BusinessPageState extends State<BusinessPage> {
             height: 5.0,
           ),
           Text(
-            'Location',
+            loc,
             style: TextStyle(
               fontSize: BodyTextSize * 1.3,
               fontFamily: "AvenirMedium",
@@ -141,7 +163,7 @@ class _BusinessPageState extends State<BusinessPage> {
             ),
           ],
         ),
-        Deals(),
+          Deals.forStore(store),
       ],
     ));
   }

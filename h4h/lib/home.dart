@@ -106,6 +106,36 @@ class _HomePageState extends State<HomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Container(
+                width: MediaQuery.of(context).size.width * 0.25,
+                height: 80.0,
+                decoration: BoxDecoration(
+                  color: Grey,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(15),
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "15% OFF",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      "Next Reward",
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               CircularPercentIndicator(
                 radius: MediaQuery.of(context).size.width * 0.25,
                 lineWidth: 10.0,
@@ -148,7 +178,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "X,XXX lbs",
+                      (double.tryParse(info['points'])/10).toStringAsFixed(1) + " lbs",
                       style: TextStyle(
                         fontSize: 20.0,
                         color: Colors.white,
@@ -165,36 +195,6 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 margin: EdgeInsets.only(left: 12.0, right: 12.0),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.25,
-                height: 80.0,
-                decoration: BoxDecoration(
-                  color: Grey,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(15),
-                  ),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "15% OFF",
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      "Redeem Now",
-                      style: TextStyle(
-                        fontSize: 14.0,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
               ),
             ],
           ),
@@ -225,12 +225,12 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 InkWell(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BusinessPage(),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => BusinessPage(),
+                    //   ),
+                    // );
                   },
                   child: SingleFood("Dairy",
                       "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.mitrask.com%2Fwp-content%2Fuploads%2F2018%2F04%2Fdairy-product.png&f=1&nofb=1"),

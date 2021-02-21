@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:h4h/styleguide.dart';
 import './deal_item.dart';
 import 'package:h4h/globalWidgets/roundedDivider.dart';
+import 'package:h4h/globalWidgets/GlobalVars.dart' as Globals;
 
 class Cart extends StatefulWidget {
   @override
@@ -9,8 +10,25 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
+  double total = 0.00;
+  double saved = 0.00;
+  int ozSaved = 0;
+
+  _calc() {
+    Globals.cart.forEach((element) {
+      ozSaved += int.tryParse(element.oz) ?? 0;
+      total += double.tryParse(element.itemPrice) ?? 0.00;
+      saved += double.tryParse(element.itemOldPrice) ?? 0.00 - double.tryParse(element.itemPrice) ?? 0.00;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    List<Widget> cartItems = [];
+    Globals.cart.forEach((element) {
+      cartItems.add(element);
+    });
+    _calc();
     return Container(
       child: Column(
         children: [
@@ -63,49 +81,7 @@ class _CartState extends State<Cart> {
             margin: EdgeInsets.only(left: 32, right: 32),
             height: MediaQuery.of(context).size.height * 0.5,
             child: ListView(
-              children: [
-                DealItem(
-                  "Milk",
-                  "That good good 2% milk32gwerg",
-                  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi5.walmartimages.com%2Fasr%2F83f533c3-3234-4bea-80bf-a0f9a43cd279_2.9b223f40bab27c513ba64f9f0e3fc2d9.jpeg&f=1&nofb=1",
-                  "1.99",
-                  "3.99",
-                  "QFC",
-                ),
-                DealItem(
-                  "Milk",
-                  "That good good 2% milkgre",
-                  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi5.walmartimages.com%2Fasr%2F83f533c3-3234-4bea-80bf-a0f9a43cd279_2.9b223f40bab27c513ba64f9f0e3fc2d9.jpeg&f=1&nofb=1",
-                  "1.99",
-                  "3.99",
-                  "QFC",
-                ),
-                DealItem(
-                  "Milk",
-                  "That good good 2% milk12342",
-                  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi5.walmartimages.com%2Fasr%2F83f533c3-3234-4bea-80bf-a0f9a43cd279_2.9b223f40bab27c513ba64f9f0e3fc2d9.jpeg&f=1&nofb=1",
-                  "1.99",
-                  "3.99",
-                  "Safeway"
-                ),
-                DealItem(
-                  "Milk",
-                  "That good good 2% milkwrtehwrthwerth",
-                  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi5.walmartimages.com%2Fasr%2F83f533c3-3234-4bea-80bf-a0f9a43cd279_2.9b223f40bab27c513ba64f9f0e3fc2d9.jpeg&f=1&nofb=1",
-                  "1.99",
-                  "3.99",
-                  "Safeway"
-                ),
-                DealItem(
-                  "Milk",
-                  "That good good 2% milkewgwretshwetrg",
-                  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi5.walmartimages.com%2Fasr%2F83f533c3-3234-4bea-80bf-a0f9a43cd279_2.9b223f40bab27c513ba64f9f0e3fc2d9.jpeg&f=1&nofb=1",
-                  "1.99",
-                  "3.99",
-                  "Safeway"
-
-                ),
-              ],
+              children: cartItems,
             ),
           ),
           Container(
@@ -114,7 +90,7 @@ class _CartState extends State<Cart> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "+42069 points | 0lb 6oz saved | \$6.90 saved",
+                  "+" + (ozSaved/2).toString() + " points | " + ozSaved.toString() + "oz saved | \$" + saved.toStringAsFixed(2) + " saved",
                   style: TextStyle(color: Grey, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -150,7 +126,7 @@ class _CartState extends State<Cart> {
                       fontSize: 25.0),
                 ),
                 Text(
-                  "\$4.20",
+                  "\$" + total.toStringAsFixed(2),
                   style: TextStyle(
                       color: LimeGreen,
                       fontWeight: FontWeight.bold,
@@ -171,7 +147,7 @@ class _CartState extends State<Cart> {
               color: LimeGreen,
               onPressed: () {},
               child: Text(
-                "Add to Instacart",
+                "Checkout",
                 style: TextStyle(
                   fontSize: 20.0,
                   color: Colors.white,

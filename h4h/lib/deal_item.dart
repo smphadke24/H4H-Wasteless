@@ -9,6 +9,7 @@ class DealItem extends StatelessWidget {
   final String itemPrice;
   final String itemOldPrice;
   final String store;
+  final String oz;
 
   DealItem(
     this.itemName,
@@ -16,7 +17,7 @@ class DealItem extends StatelessWidget {
     this.url,
     this.itemPrice,
     this.itemOldPrice,
-    this.store,
+    this.store, this.oz,
   );
 
   @override
