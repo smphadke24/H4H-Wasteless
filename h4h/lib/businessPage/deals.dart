@@ -78,6 +78,7 @@ class _DealsState extends State<Deals> {
     return Container(
       height: 120,
       padding: EdgeInsets.all(15.0),
+      margin: EdgeInsets.only(bottom: 22),
       decoration: BoxDecoration(
         color: LightGrey,
         borderRadius: BorderRadius.circular(10.0),
@@ -145,7 +146,7 @@ class _DealsState extends State<Deals> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "\$" + currentDeal.oldItemPrice,
+                    "\$" + currentDeal.itemOldPrice,
                     style: TextStyle(
                       decoration: TextDecoration.lineThrough,
                       fontSize: 14.0,
@@ -170,8 +171,7 @@ class _DealsState extends State<Deals> {
                   showDialog(
                     context: context,
                     builder: (BuildContext context) => PopUp(
-                      url:
-                          "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.commitpoint.com%2Fassets%2Fimages%2Fproducts.png&f=1&nofb=1",
+                      url: currentDeal.url,
                       itemName: currentDeal.itemName,
                       description: currentDeal.itemDescription,
                       oldPrice: currentDeal.itemOldPrice.toString(),

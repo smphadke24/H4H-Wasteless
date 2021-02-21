@@ -3,6 +3,8 @@ import 'package:h4h/deal_item.dart';
 import 'package:h4h/styleguide.dart';
 import 'package:h4h/globalWidgets/GlobalVars.dart' as Globals;
 
+import 'businessPage/deals.dart';
+
 class PopUp extends StatelessWidget {
   final String url;
   final String itemName;

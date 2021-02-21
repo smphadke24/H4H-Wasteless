@@ -24,7 +24,7 @@ class _CartState extends State<Cart> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> cartItems = [];
+    List<DealItem> cartItems = [];
     Globals.cart.forEach((element) {
       cartItems.add(element);
     });
